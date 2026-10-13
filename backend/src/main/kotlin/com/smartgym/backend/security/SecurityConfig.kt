@@ -13,6 +13,9 @@ import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.security.web.SecurityFilterChain
 import org.springframework.security.web.authentication.HttpStatusEntryPoint
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
+import org.springframework.web.cors.CorsConfiguration
+import org.springframework.web.cors.CorsConfigurationSource
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource
 
 /**
  * Configuração do Spring Security.
@@ -36,6 +39,8 @@ class SecurityConfig(private val jwtAuthenticationFilter: JwtAuthenticationFilte
         http
             // API REST com token não usa sessão nem CSRF
             .csrf { it.disable() }
+            // Libera o frontend Web (Compose) rodando em http://localhost:3000
+            .cors { }
             .sessionManagement { it.sessionCreationPolicy(SessionCreationPolicy.STATELESS) }
             .authorizeHttpRequests {
                 it
@@ -50,5 +55,17 @@ class SecurityConfig(private val jwtAuthenticationFilter: JwtAuthenticationFilte
             .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter::class.java)
 
         return http.build()
+    }
+
+    // Origens que podem chamar a API pelo navegador (CORS)
+    @Bean
+    fun corsConfigurationSource(): CorsConfigurationSource {
+        val configuracao = CorsConfiguration()
+        configuracao.allowedOrigins = listOf("http://localhost:3000")
+        configuracao.allowedMethods = listOf("GET", "POST", "PUT", "DELETE", "OPTIONS")
+        configuracao.allowedHeaders = listOf("*")
+        val fonte = UrlBasedCorsConfigurationSource()
+        fonte.registerCorsConfiguration("/api/**", configuracao)
+        return fonte
     }
 }
