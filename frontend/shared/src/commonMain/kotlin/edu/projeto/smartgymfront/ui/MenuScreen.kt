@@ -12,7 +12,10 @@ import edu.projeto.smartgymfront.ui.componentes.Tela
 
 @Composable
 fun MenuScreen(aoAbrir: (TelaApp) -> Unit, aoSair: () -> Unit) {
-    val opcoes = listOf<Pair<String, TelaApp>>()
+    val opcoes = listOf(
+        "Usuários" to TelaApp.USUARIO,
+        "Planos" to TelaApp.PLANO
+    )
 
     Tela("Smart Gym") {
         Text("Logado como: ${ApiClient.emailLogado ?: ""}")

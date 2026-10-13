@@ -21,10 +21,14 @@ import androidx.compose.ui.unit.dp
 import edu.projeto.smartgymfront.api.AuthApi
 import edu.projeto.smartgymfront.ui.LoginScreen
 import edu.projeto.smartgymfront.ui.MenuScreen
+import edu.projeto.smartgymfront.ui.PlanoForm
+import edu.projeto.smartgymfront.ui.UsuarioForm
 
 enum class TelaApp {
     LOGIN,
-    MENU
+    MENU,
+    USUARIO,
+    PLANO
 }
 
 @Composable
@@ -52,6 +56,8 @@ fun App() {
                                 tela = TelaApp.LOGIN
                             }
                         )
+                        TelaApp.USUARIO -> UsuarioForm(aoVoltar = { tela = TelaApp.MENU })
+                        TelaApp.PLANO -> PlanoForm(aoVoltar = { tela = TelaApp.MENU })
                     }
                 }
             }
