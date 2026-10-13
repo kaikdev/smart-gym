@@ -1,7 +1,3 @@
 package edu.projeto.smartgymfront
 
-class WasmPlatform: Platform {
-    override val name: String = "Web with Kotlin/Wasm"
-}
-
-actual fun getPlatform(): Platform = WasmPlatform()
+actual val urlBackend: String = "http://localhost:8080"

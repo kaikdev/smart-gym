@@ -1,7 +1,3 @@
 package edu.projeto.smartgymfront
 
-class JVMPlatform: Platform {
-    override val name: String = "Java ${System.getProperty("java.version")}"
-}
-
-actual fun getPlatform(): Platform = JVMPlatform()
+actual val urlBackend: String = "http://localhost:8080"
