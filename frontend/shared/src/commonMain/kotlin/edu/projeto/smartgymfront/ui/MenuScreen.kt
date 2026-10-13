@@ -14,7 +14,9 @@ import edu.projeto.smartgymfront.ui.componentes.Tela
 fun MenuScreen(aoAbrir: (TelaApp) -> Unit, aoSair: () -> Unit) {
     val opcoes = listOf(
         "Usuários" to TelaApp.USUARIO,
-        "Planos" to TelaApp.PLANO
+        "Planos" to TelaApp.PLANO,
+        "Treinos" to TelaApp.TREINO,
+        "Avaliações Físicas" to TelaApp.AVALIACAO_FISICA
     )
 
     Tela("Smart Gym") {

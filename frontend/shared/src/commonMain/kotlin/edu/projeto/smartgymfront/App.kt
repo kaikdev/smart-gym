@@ -19,16 +19,20 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import edu.projeto.smartgymfront.api.AuthApi
+import edu.projeto.smartgymfront.ui.AvaliacaoFisicaForm
 import edu.projeto.smartgymfront.ui.LoginScreen
 import edu.projeto.smartgymfront.ui.MenuScreen
 import edu.projeto.smartgymfront.ui.PlanoForm
+import edu.projeto.smartgymfront.ui.TreinoForm
 import edu.projeto.smartgymfront.ui.UsuarioForm
 
 enum class TelaApp {
     LOGIN,
     MENU,
     USUARIO,
-    PLANO
+    PLANO,
+    TREINO,
+    AVALIACAO_FISICA
 }
 
 @Composable
@@ -58,6 +62,8 @@ fun App() {
                         )
                         TelaApp.USUARIO -> UsuarioForm(aoVoltar = { tela = TelaApp.MENU })
                         TelaApp.PLANO -> PlanoForm(aoVoltar = { tela = TelaApp.MENU })
+                        TelaApp.TREINO -> TreinoForm(aoVoltar = { tela = TelaApp.MENU })
+                        TelaApp.AVALIACAO_FISICA -> AvaliacaoFisicaForm(aoVoltar = { tela = TelaApp.MENU })
                     }
                 }
             }
