@@ -40,6 +40,7 @@ object ApiClient {
         install(ContentNegotiation) {
             json(Json {
                 ignoreUnknownKeys = true
+                encodeDefaults = true
                 explicitNulls = false
             })
         }
