@@ -16,7 +16,9 @@ fun MenuScreen(aoAbrir: (TelaApp) -> Unit, aoSair: () -> Unit) {
         "Usuários" to TelaApp.USUARIO,
         "Planos" to TelaApp.PLANO,
         "Treinos" to TelaApp.TREINO,
-        "Avaliações Físicas" to TelaApp.AVALIACAO_FISICA
+        "Avaliações Físicas" to TelaApp.AVALIACAO_FISICA,
+        "Agendamentos" to TelaApp.AGENDAMENTO,
+        "Pagamentos" to TelaApp.PAGAMENTO
     )
 
     Tela("Smart Gym") {
