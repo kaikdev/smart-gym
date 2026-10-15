@@ -21,6 +21,8 @@ import androidx.compose.ui.unit.dp
 import edu.projeto.smartgymfront.api.AuthApi
 import edu.projeto.smartgymfront.ui.AgendamentoForm
 import edu.projeto.smartgymfront.ui.AvaliacaoFisicaForm
+import edu.projeto.smartgymfront.ui.EquipamentoForm
+import edu.projeto.smartgymfront.ui.ExercicioForm
 import edu.projeto.smartgymfront.ui.LoginScreen
 import edu.projeto.smartgymfront.ui.MenuScreen
 import edu.projeto.smartgymfront.ui.PagamentoForm
@@ -36,7 +38,9 @@ enum class TelaApp {
     TREINO,
     AVALIACAO_FISICA,
     AGENDAMENTO,
-    PAGAMENTO
+    PAGAMENTO,
+    EXERCICIO,
+    EQUIPAMENTO
 }
 
 @Composable
@@ -70,6 +74,8 @@ fun App() {
                         TelaApp.AVALIACAO_FISICA -> AvaliacaoFisicaForm(aoVoltar = { tela = TelaApp.MENU })
                         TelaApp.AGENDAMENTO -> AgendamentoForm(aoVoltar = { tela = TelaApp.MENU })
                         TelaApp.PAGAMENTO -> PagamentoForm(aoVoltar = { tela = TelaApp.MENU })
+                        TelaApp.EXERCICIO -> ExercicioForm(aoVoltar = { tela = TelaApp.MENU })
+                        TelaApp.EQUIPAMENTO -> EquipamentoForm(aoVoltar = { tela = TelaApp.MENU })
                     }
                 }
             }
