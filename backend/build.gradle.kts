@@ -39,6 +39,9 @@ dependencies {
     runtimeOnly("io.jsonwebtoken:jjwt-impl:0.13.0")
     runtimeOnly("io.jsonwebtoken:jjwt-jackson:0.13.0")
 
+    // Swagger / OpenAPI (documentação da API em /swagger-ui.html)
+    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:3.1.1")
+
     // Driver do MySQL
     runtimeOnly("com.mysql:mysql-connector-j")
 

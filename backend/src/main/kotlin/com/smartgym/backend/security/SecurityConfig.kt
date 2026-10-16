@@ -46,6 +46,8 @@ class SecurityConfig(private val jwtAuthenticationFilter: JwtAuthenticationFilte
                 it
                     // Rotas públicas
                     .requestMatchers("/api/auth/signin", "/api/auth/signup", "/error").permitAll()
+                    // Documentação Swagger (pública)
+                    .requestMatchers("/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs/**").permitAll()
                     // Todas as demais exigem token
                     .anyRequest().authenticated()
             }
