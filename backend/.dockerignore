@@ -1,0 +1,7 @@
+.gradle
+.kotlin
+.idea
+build
+bin
+out
+*.iml
