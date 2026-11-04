@@ -61,6 +61,9 @@ O **Smart Gym** é um sistema de gestão inteligente para academias que integra 
 - Alvos: Android, Desktop (JVM) e Web (Kotlin/Wasm e Kotlin/JS)
 - Ktor Client (requisições HTTP) e kotlinx-serialization (JSON)
 - kotlinx-datetime (datas)
+- Navigation3 (navegação entre as telas, em dois níveis)
+- ViewModel (lifecycle-viewmodel-compose) para o estado de cada CRUD
+- Material Icons (ícones de editar e apagar)
 
 **Infraestrutura**
 - Docker e Docker Compose
@@ -93,10 +96,14 @@ Configurações (banco e JWT) ficam em `backend/src/main/resources/application.p
 | Camada / módulo | Pasta | Responsabilidade |
 |---|---|---|
 | Código compartilhado | `frontend/shared/src/commonMain/kotlin/edu/projeto/smartgymfront/` | Código usado por todas as plataformas |
-| Comunicação com a API | `.../smartgymfront/api/` | Cliente HTTP com JWT (`ApiClient`) e autenticação (`AuthApi`) |
+| Comunicação com a API | `.../smartgymfront/api/` | Cliente HTTP com JWT (`ApiClient`) e autenticação (`AuthApi`, rotas `/login` e `/register`) |
+| Sessão | `.../smartgymfront/sessao/` | `SessaoUsuario`: guarda o token JWT e o e-mail do usuário logado como estado da aplicação |
 | Modelos | `.../smartgymfront/model/` | Classes de dados das 8 entidades |
-| Telas (UI) | `.../smartgymfront/ui/` | Login, menu e formulários de cada entidade |
-| Componentes de UI | `.../smartgymfront/ui/componentes/` | Campos, botões, lista de registros e conversões de data |
+| Repositórios remotos | `.../smartgymfront/repositorio/` | Um `RepositorioRemoto` por entidade, com as chamadas GET, POST, PUT e DELETE da API |
+| ViewModels | `.../smartgymfront/viewmodel/` | Um ViewModel por CRUD: estado de cada campo, lista de registros e funções carregar, gravar, editar, apagar e limpar |
+| Navegação | `.../smartgymfront/navegacao/` | Rotas do Navigation3: 1º nível (Login, Registro, Menu e CRUDs) e 2º nível (Listagem e Formulário) |
+| Telas (UI) | `.../smartgymfront/ui/` | Login, Registro, Menu e uma pasta por entidade (`ui/usuario/`, `ui/plano/` etc.) com as telas de Listagem e Formulário |
+| Componentes de UI | `.../smartgymfront/ui/componentes/` | Campos, botões, card com ícones de editar e apagar e conversões de data |
 | Código por plataforma | `frontend/shared/src/androidMain`, `jvmMain`, `jsMain`, `wasmJsMain` | Endereço do backend em cada plataforma |
 | App Android | `frontend/androidApp/` | Ponto de entrada Android |
 | App Desktop | `frontend/desktopApp/` | Ponto de entrada Desktop |
@@ -151,6 +158,6 @@ Para Android, ajuste o IP do computador em `frontend/shared/src/androidMain/kotl
 
 ### Primeiro acesso
 
-1. No app, use **Criar conta** (ou `POST /api/auth/signup` no Swagger).
-2. Faça login. O backend devolve um token JWT, exigido em todas as rotas, exceto as de autenticação.
-3. No Swagger: faça `POST /api/auth/signin`, copie o `token`, clique em **Authorize** e cole o token. A partir daí as demais rotas podem ser testadas.
+1. No app, clique em **Ir para o registro** e crie a conta (ou use `POST /api/auth/register` no Swagger). O registro já devolve o token e abre o menu.
+2. Nas próximas vezes, faça login com e-mail e senha. O backend devolve um token JWT, exigido em todas as rotas, exceto as de autenticação.
+3. No Swagger: faça `POST /api/auth/login` (ou `/api/auth/register`), copie o `token`, clique em **Authorize** e cole o token. A partir daí as demais rotas podem ser testadas.
