@@ -1,10 +1,17 @@
 package edu.projeto.smartgymfront.ui.componentes
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeContentPadding
+import androidx.compose.foundation.layout.widthIn
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.CircularProgressIndicator
@@ -76,11 +83,23 @@ fun Mensagem(texto: String?, sucesso: Boolean) {
 
 @Composable
 fun Tela(titulo: String, aoVoltar: (() -> Unit)? = null, conteudo: @Composable () -> Unit) {
-    Column(verticalArrangement = Arrangement.spacedBy(12.dp), modifier = Modifier.fillMaxWidth()) {
-        Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-            if (aoVoltar != null) OutlinedButton(onClick = aoVoltar) { Text("Voltar") }
-            Text(titulo, style = MaterialTheme.typography.headlineSmall)
+    Box(
+        contentAlignment = Alignment.TopCenter,
+        modifier = Modifier
+            .fillMaxSize()
+            .safeContentPadding()
+            .verticalScroll(rememberScrollState())
+            .padding(16.dp)
+    ) {
+        Column(
+            verticalArrangement = Arrangement.spacedBy(12.dp),
+            modifier = Modifier.widthIn(max = 600.dp).fillMaxWidth()
+        ) {
+            Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                if (aoVoltar != null) OutlinedButton(onClick = aoVoltar) { Text("Voltar") }
+                Text(titulo, style = MaterialTheme.typography.headlineSmall)
+            }
+            conteudo()
         }
-        conteudo()
     }
 }
