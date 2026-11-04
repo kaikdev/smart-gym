@@ -27,11 +27,13 @@ import edu.projeto.smartgymfront.ui.LoginScreen
 import edu.projeto.smartgymfront.ui.MenuScreen
 import edu.projeto.smartgymfront.ui.PagamentoForm
 import edu.projeto.smartgymfront.ui.PlanoForm
+import edu.projeto.smartgymfront.ui.RegistroScreen
 import edu.projeto.smartgymfront.ui.TreinoForm
 import edu.projeto.smartgymfront.ui.UsuarioForm
 
 enum class TelaApp {
     LOGIN,
+    REGISTRO,
     MENU,
     USUARIO,
     PLANO,
@@ -60,7 +62,14 @@ fun App() {
             ) {
                 Box(modifier = Modifier.widthIn(max = 600.dp)) {
                     when (tela) {
-                        TelaApp.LOGIN -> LoginScreen(aoEntrar = { tela = TelaApp.MENU })
+                        TelaApp.LOGIN -> LoginScreen(
+                            aoEntrar = { tela = TelaApp.MENU },
+                            aoIrParaRegistro = { tela = TelaApp.REGISTRO }
+                        )
+                        TelaApp.REGISTRO -> RegistroScreen(
+                            aoRegistrar = { tela = TelaApp.MENU },
+                            aoIrParaLogin = { tela = TelaApp.LOGIN }
+                        )
                         TelaApp.MENU -> MenuScreen(
                             aoAbrir = { tela = it },
                             aoSair = {
