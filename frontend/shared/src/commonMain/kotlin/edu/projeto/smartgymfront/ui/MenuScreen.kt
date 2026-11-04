@@ -7,7 +7,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import edu.projeto.smartgymfront.TelaApp
-import edu.projeto.smartgymfront.api.ApiClient
+import edu.projeto.smartgymfront.sessao.SessaoUsuario
 import edu.projeto.smartgymfront.ui.componentes.Tela
 
 @Composable
@@ -24,7 +24,7 @@ fun MenuScreen(aoAbrir: (TelaApp) -> Unit, aoSair: () -> Unit) {
     )
 
     Tela("Smart Gym") {
-        Text("Logado como: ${ApiClient.emailLogado ?: ""}")
+        Text("Logado como: ${SessaoUsuario.email ?: ""}")
         if (opcoes.isEmpty()) Text("Nenhum cadastro disponível ainda.")
         opcoes.forEach { (titulo, tela) ->
             Button(onClick = { aoAbrir(tela) }, modifier = Modifier.fillMaxWidth()) {

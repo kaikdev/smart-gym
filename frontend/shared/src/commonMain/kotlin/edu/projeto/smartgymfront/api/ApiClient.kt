@@ -1,5 +1,6 @@
 package edu.projeto.smartgymfront.api
 
+import edu.projeto.smartgymfront.sessao.SessaoUsuario
 import edu.projeto.smartgymfront.urlBackend
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
@@ -32,9 +33,6 @@ class ApiException(
 
 object ApiClient {
 
-    var token: String? = null
-    var emailLogado: String? = null
-
     val http = HttpClient {
         expectSuccess = false
         install(ContentNegotiation) {
@@ -47,7 +45,7 @@ object ApiClient {
         defaultRequest {
             url("$urlBackend/")
             contentType(ContentType.Application.Json)
-            token?.let { header(HttpHeaders.Authorization, "Bearer $it") }
+            SessaoUsuario.token?.let { header(HttpHeaders.Authorization, "Bearer $it") }
         }
     }
 
@@ -57,13 +55,16 @@ object ApiClient {
     suspend inline fun <reified T, reified R> criar(caminho: String, corpo: T): R =
         executar { http.post(caminho) { setBody(corpo) } }
 
-    suspend inline fun <reified R> executar(chamada: () -> HttpResponse): R {
+    suspend inline fun <reified R> executar(chamada: () -> HttpResponse): R = enviar(chamada).body()
+
+    suspend inline fun enviar(chamada: () -> HttpResponse): HttpResponse {
         val resposta = try {
             chamada()
         } catch (e: Exception) {
             throw ApiException("Não foi possível conectar ao servidor ($urlBackend)")
         }
-        if (resposta.status.isSuccess()) return resposta.body()
+        if (resposta.status.isSuccess()) return resposta
+        if (resposta.status.value == 401 && SessaoUsuario.autenticado) SessaoUsuario.encerrar()
         val erro = runCatching { resposta.body<ErroResponse>() }.getOrNull()
         val mensagem = erro?.mensagem?.takeIf { it.isNotBlank() } ?: when (resposta.status.value) {
             401 -> "Sessão expirada. Faça login novamente."

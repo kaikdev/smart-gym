@@ -50,11 +50,8 @@ fun LoginScreen(aoEntrar: () -> Unit) {
         escopo.launch {
             try {
                 if (criarConta) {
-                    AuthApi.cadastrar(nome.trim(), email.trim(), senha)
-                    criarConta = false
-                    senha = ""
-                    sucesso = true
-                    mensagem = "Conta criada. Faça login."
+                    AuthApi.registrar(nome.trim(), email.trim(), senha)
+                    aoEntrar()
                 } else {
                     AuthApi.entrar(email.trim(), senha)
                     aoEntrar()
