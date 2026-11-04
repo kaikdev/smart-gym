@@ -3,10 +3,7 @@ package com.smartgym.backend.dto
 import jakarta.validation.constraints.Email
 import jakarta.validation.constraints.NotBlank
 
-/**
- * Credenciais enviadas para /api/auth/signin.
- */
-data class SigninRequest(
+data class LoginRequest(
 
     @field:NotBlank(message = "O e-mail é obrigatório")
     @field:Email(message = "E-mail inválido")

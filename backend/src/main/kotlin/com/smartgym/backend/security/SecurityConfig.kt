@@ -17,49 +17,35 @@ import org.springframework.web.cors.CorsConfiguration
 import org.springframework.web.cors.CorsConfigurationSource
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource
 
-/**
- * Configuração do Spring Security.
- */
 @Configuration
 @EnableWebSecurity
 class SecurityConfig(private val jwtAuthenticationFilter: JwtAuthenticationFilter) {
 
-    // Criptografia das senhas com BCrypt
     @Bean
     fun passwordEncoder(): PasswordEncoder = BCryptPasswordEncoder()
 
-    // Gerenciador usado pelo /signin para validar e-mail e senha
     @Bean
     fun authenticationManager(configuration: AuthenticationConfiguration): AuthenticationManager =
         configuration.authenticationManager
 
-    // Regras de autorização
     @Bean
     fun securityFilterChain(http: HttpSecurity): SecurityFilterChain {
         http
-            // API REST com token não usa sessão nem CSRF
             .csrf { it.disable() }
-            // Libera o frontend Web (Compose) rodando em http://localhost:3000
             .cors { }
             .sessionManagement { it.sessionCreationPolicy(SessionCreationPolicy.STATELESS) }
             .authorizeHttpRequests {
                 it
-                    // Rotas públicas
-                    .requestMatchers("/api/auth/signin", "/api/auth/signup", "/error").permitAll()
-                    // Documentação Swagger (pública)
+                    .requestMatchers("/api/auth/login", "/api/auth/register", "/error").permitAll()
                     .requestMatchers("/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs/**").permitAll()
-                    // Todas as demais exigem token
                     .anyRequest().authenticated()
             }
-            // Sem token (ou token inválido) -> 401 Unauthorized
             .exceptionHandling { it.authenticationEntryPoint(HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED)) }
-            // Nosso filtro JWT roda antes do filtro padrão de login
             .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter::class.java)
 
         return http.build()
     }
 
-    // Origens que podem chamar a API pelo navegador (CORS)
     @Bean
     fun corsConfigurationSource(): CorsConfigurationSource {
         val configuracao = CorsConfiguration()

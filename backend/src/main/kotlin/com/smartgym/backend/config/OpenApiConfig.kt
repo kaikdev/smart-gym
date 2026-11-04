@@ -8,10 +8,6 @@ import io.swagger.v3.oas.models.security.SecurityScheme
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 
-/**
- * Configuração do Swagger (OpenAPI).
- * Tela disponível em http://localhost:8080/swagger-ui.html
- */
 @Configuration
 class OpenApiConfig {
 
@@ -23,12 +19,11 @@ class OpenApiConfig {
                 .version("1.0.0")
                 .description(
                     "API do Smart Gym. Para testar as rotas protegidas: " +
-                        "1) crie uma conta em POST /api/auth/signup; " +
-                        "2) faça login em POST /api/auth/signin e copie o token; " +
+                        "1) crie uma conta em POST /api/auth/register ou faça login em POST /api/auth/login; " +
+                        "2) copie o token da resposta; " +
                         "3) clique em Authorize e cole o token."
                 )
         )
-        // Botão "Authorize" para informar o token JWT
         .components(
             Components().addSecuritySchemes(
                 "bearerAuth",
@@ -38,6 +33,5 @@ class OpenApiConfig {
                     .bearerFormat("JWT")
             )
         )
-        // Envia o token em todas as rotas
         .addSecurityItem(SecurityRequirement().addList("bearerAuth"))
 }

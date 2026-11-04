@@ -7,9 +7,6 @@ import jakarta.validation.constraints.Positive
 import jakarta.validation.constraints.Size
 import java.time.LocalDate
 
-/**
- * Dados recebidos na requisição (POST/PUT de usuário e /signup).
- */
 data class UsuarioRequest(
 
     @field:NotBlank(message = "O nome é obrigatório")
