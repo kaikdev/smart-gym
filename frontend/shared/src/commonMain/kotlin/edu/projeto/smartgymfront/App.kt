@@ -23,9 +23,9 @@ import edu.projeto.smartgymfront.ui.ExercicioForm
 import edu.projeto.smartgymfront.ui.LoginScreen
 import edu.projeto.smartgymfront.ui.MenuScreen
 import edu.projeto.smartgymfront.ui.PagamentoForm
-import edu.projeto.smartgymfront.ui.PlanoForm
 import edu.projeto.smartgymfront.ui.RegistroScreen
 import edu.projeto.smartgymfront.ui.TreinoForm
+import edu.projeto.smartgymfront.ui.plano.PlanoCrud
 import edu.projeto.smartgymfront.ui.usuario.UsuarioCrud
 
 @Composable
@@ -77,7 +77,7 @@ fun App() {
                         MenuScreen(aoAbrir = ::abrir, aoSair = AuthApi::sair)
                     }
                     entry<Rota.Usuarios> { UsuarioCrud(aoVoltar = ::voltar) }
-                    entry<Rota.Planos> { PlanoForm(aoVoltar = ::voltar) }
+                    entry<Rota.Planos> { PlanoCrud(aoVoltar = ::voltar) }
                     entry<Rota.Exercicios> { ExercicioForm(aoVoltar = ::voltar) }
                     entry<Rota.Equipamentos> { EquipamentoForm(aoVoltar = ::voltar) }
                     entry<Rota.Treinos> { TreinoForm(aoVoltar = ::voltar) }
