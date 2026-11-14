@@ -17,11 +17,11 @@ import edu.projeto.smartgymfront.api.AuthApi
 import edu.projeto.smartgymfront.navegacao.Rota
 import edu.projeto.smartgymfront.sessao.SessaoUsuario
 import edu.projeto.smartgymfront.ui.AgendamentoForm
-import edu.projeto.smartgymfront.ui.AvaliacaoFisicaForm
 import edu.projeto.smartgymfront.ui.LoginScreen
 import edu.projeto.smartgymfront.ui.MenuScreen
 import edu.projeto.smartgymfront.ui.PagamentoForm
 import edu.projeto.smartgymfront.ui.RegistroScreen
+import edu.projeto.smartgymfront.ui.avaliacaofisica.AvaliacaoFisicaCrud
 import edu.projeto.smartgymfront.ui.equipamento.EquipamentoCrud
 import edu.projeto.smartgymfront.ui.exercicio.ExercicioCrud
 import edu.projeto.smartgymfront.ui.plano.PlanoCrud
@@ -81,7 +81,7 @@ fun App() {
                     entry<Rota.Exercicios> { ExercicioCrud(aoVoltar = ::voltar) }
                     entry<Rota.Equipamentos> { EquipamentoCrud(aoVoltar = ::voltar) }
                     entry<Rota.Treinos> { TreinoCrud(aoVoltar = ::voltar) }
-                    entry<Rota.Avaliacoes> { AvaliacaoFisicaForm(aoVoltar = ::voltar) }
+                    entry<Rota.Avaliacoes> { AvaliacaoFisicaCrud(aoVoltar = ::voltar) }
                     entry<Rota.Agendamentos> { AgendamentoForm(aoVoltar = ::voltar) }
                     entry<Rota.Pagamentos> { PagamentoForm(aoVoltar = ::voltar) }
                 }
