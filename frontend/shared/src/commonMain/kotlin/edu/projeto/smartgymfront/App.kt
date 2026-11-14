@@ -22,10 +22,10 @@ import edu.projeto.smartgymfront.ui.LoginScreen
 import edu.projeto.smartgymfront.ui.MenuScreen
 import edu.projeto.smartgymfront.ui.PagamentoForm
 import edu.projeto.smartgymfront.ui.RegistroScreen
-import edu.projeto.smartgymfront.ui.TreinoForm
 import edu.projeto.smartgymfront.ui.equipamento.EquipamentoCrud
 import edu.projeto.smartgymfront.ui.exercicio.ExercicioCrud
 import edu.projeto.smartgymfront.ui.plano.PlanoCrud
+import edu.projeto.smartgymfront.ui.treino.TreinoCrud
 import edu.projeto.smartgymfront.ui.usuario.UsuarioCrud
 
 @Composable
@@ -80,7 +80,7 @@ fun App() {
                     entry<Rota.Planos> { PlanoCrud(aoVoltar = ::voltar) }
                     entry<Rota.Exercicios> { ExercicioCrud(aoVoltar = ::voltar) }
                     entry<Rota.Equipamentos> { EquipamentoCrud(aoVoltar = ::voltar) }
-                    entry<Rota.Treinos> { TreinoForm(aoVoltar = ::voltar) }
+                    entry<Rota.Treinos> { TreinoCrud(aoVoltar = ::voltar) }
                     entry<Rota.Avaliacoes> { AvaliacaoFisicaForm(aoVoltar = ::voltar) }
                     entry<Rota.Agendamentos> { AgendamentoForm(aoVoltar = ::voltar) }
                     entry<Rota.Pagamentos> { PagamentoForm(aoVoltar = ::voltar) }
