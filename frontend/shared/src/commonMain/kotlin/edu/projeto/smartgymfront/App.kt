@@ -18,12 +18,12 @@ import edu.projeto.smartgymfront.navegacao.Rota
 import edu.projeto.smartgymfront.sessao.SessaoUsuario
 import edu.projeto.smartgymfront.ui.LoginScreen
 import edu.projeto.smartgymfront.ui.MenuScreen
-import edu.projeto.smartgymfront.ui.PagamentoForm
 import edu.projeto.smartgymfront.ui.RegistroScreen
 import edu.projeto.smartgymfront.ui.agendamento.AgendamentoCrud
 import edu.projeto.smartgymfront.ui.avaliacaofisica.AvaliacaoFisicaCrud
 import edu.projeto.smartgymfront.ui.equipamento.EquipamentoCrud
 import edu.projeto.smartgymfront.ui.exercicio.ExercicioCrud
+import edu.projeto.smartgymfront.ui.pagamento.PagamentoCrud
 import edu.projeto.smartgymfront.ui.plano.PlanoCrud
 import edu.projeto.smartgymfront.ui.treino.TreinoCrud
 import edu.projeto.smartgymfront.ui.usuario.UsuarioCrud
@@ -83,7 +83,7 @@ fun App() {
                     entry<Rota.Treinos> { TreinoCrud(aoVoltar = ::voltar) }
                     entry<Rota.Avaliacoes> { AvaliacaoFisicaCrud(aoVoltar = ::voltar) }
                     entry<Rota.Agendamentos> { AgendamentoCrud(aoVoltar = ::voltar) }
-                    entry<Rota.Pagamentos> { PagamentoForm(aoVoltar = ::voltar) }
+                    entry<Rota.Pagamentos> { PagamentoCrud(aoVoltar = ::voltar) }
                 }
             )
         }
