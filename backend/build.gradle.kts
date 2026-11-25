@@ -42,6 +42,8 @@ dependencies {
     // Swagger / OpenAPI (documentação da API em /swagger-ui.html)
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:3.1.1")
 
+    implementation("org.eclipse.paho:org.eclipse.paho.client.mqttv3:1.2.5")
+
     // Driver do MySQL
     runtimeOnly("com.mysql:mysql-connector-j")
 
