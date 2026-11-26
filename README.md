@@ -19,7 +19,7 @@ Cada integrante foi responsável por duas entidades, do backend (entidade, repos
 
 | Integrante | Entidades |
 |---|---|
-| Kaik Silva Sousa | `Usuario` e `Plano` |
+| Kaik Silva Sousa | `Usuario` e `Plano`, e a parte IoT: dispositivo ESP32, entidade `LeituraSensor` e listener MQTT |
 | Robert Guimarães Silva | `Exercicio` e `Equipamento` |
 | Gabriel Vasques de Abreu | `Treino` e `AvaliacaoFisica` |
 | Andrey de Mendonça | `Agendamento` e `Pagamento` |
@@ -60,7 +60,7 @@ O **Smart Gym** é um sistema de gestão inteligente para academias que integra 
 | `AvaliacaoFisica` | `avaliacoes_fisicas` | id (Long), avaliador (String), dataAvaliacao (LocalDate), altura (Float), imc (Float), percentualGordura (Double) | Gabriel |
 | `Agendamento` | `agendamentos` | id (Long), tipoAula (String), instrutor (String), dataHoraAgendada (LocalDateTime), capacidadeMaxima (Int), cancelado (Boolean) | Andrey |
 | `Pagamento` | `pagamentos` | id (Long), metodo (String), codigoTransacao (String), dataProcessamento (LocalDateTime), valorFinal (Double), confirmado (Boolean) | Andrey |
-| `LeituraSensor` (IoT) | `leituras_sensor` | id (Long), codigoSensor (String), emUso (Boolean), dataHoraLeitura (LocalDateTime), equipamentoId (Long) | Grupo |
+| `LeituraSensor` (IoT) | `leituras_sensor` | id (Long), codigoSensor (String), emUso (Boolean), dataHoraLeitura (LocalDateTime), equipamentoId (Long) | Kaik |
 
 A `LeituraSensor` não tem CRUD no frontend: ela é gravada automaticamente pelo listener MQTT a cada mensagem do sensor e pode ser consultada pela API.
 

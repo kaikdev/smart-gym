@@ -17,7 +17,7 @@ Dispositivo IoT do **Smart Gym**: um ESP32 com sensor de presença PIR instalado
 
 | Integrante | Responsabilidade no projeto |
 |---|---|
-| Kaik Silva Sousa | Entidades `Usuario` e `Plano` |
+| Kaik Silva Sousa | Entidades `Usuario` e `Plano`, e toda a parte IoT: circuito no Wokwi, código do ESP32, entidade `LeituraSensor` e listener MQTT no backend |
 | Robert Guimarães Silva | Entidades `Exercicio` e `Equipamento` (equipamento ligado ao sensor IoT) |
 | Gabriel Vasques de Abreu | Entidades `Treino` e `AvaliacaoFisica` |
 | Andrey de Mendonça | Entidades `Agendamento` e `Pagamento` |

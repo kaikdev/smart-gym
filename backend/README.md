@@ -15,7 +15,7 @@ API REST do **Smart Gym**, desenvolvida em Kotlin com Spring Boot, Spring Securi
 
 | Integrante | Entidades (entidade, repositório, serviço, controller, DTOs, mapper e validações) |
 |---|---|
-| Kaik Silva Sousa | `Usuario` e `Plano` |
+| Kaik Silva Sousa | `Usuario` e `Plano`, e a parte IoT: entidade `LeituraSensor`, repositório, serviço, controller e listener MQTT (`SensorMqttListener`) |
 | Robert Guimarães Silva | `Exercicio` e `Equipamento` |
 | Gabriel Vasques de Abreu | `Treino` e `AvaliacaoFisica` |
 | Andrey de Mendonça | `Agendamento` e `Pagamento` |
