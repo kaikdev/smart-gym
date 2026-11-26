@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Smart Gym">
+  <path fill="#C6F432" d="M14 0H50A14 14 0 0 1 64 14V50A14 14 0 0 1 50 64H14A14 14 0 0 1 0 50V14A14 14 0 0 1 14 0Z"/>
+  <path fill="#14171C" d="M18 37H46V41H18Z M10 31H16V47H10Z M16 34H20V44H16Z M48 31H54V47H48Z M44 34H48V44H44Z"/>
+  <circle fill="#14171C" cx="32" cy="26" r="2.5"/>
+  <path fill="none" stroke="#14171C" stroke-width="3" stroke-linecap="round" d="M25.6 19.6A9 9 0 0 1 38.4 19.6 M20.7 14.7A16 16 0 0 1 43.3 14.7"/>
+</svg>

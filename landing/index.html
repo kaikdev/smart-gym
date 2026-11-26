@@ -1,0 +1,362 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Smart Gym</title>
+  <meta name="description" content="Smart Gym: gestão inteligente para academias com sensores IoT que mostram, em tempo real, quais aparelhos estão livres ou em uso.">
+  <meta name="theme-color" content="#0F1115">
+  <link rel="icon" type="image/svg+xml" href="logo.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topo" id="topo">
+    <div class="container topo__conteudo">
+      <a href="#inicio" class="marca" aria-label="Smart Gym, voltar ao início">
+        <img src="logo.svg" alt="" width="36" height="36">
+        <span>Smart Gym</span>
+      </a>
+      <button class="menu-botao" id="menuBotao" aria-label="Abrir menu" aria-expanded="false" aria-controls="menuLinks">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="menu" id="menuLinks" aria-label="Seções da página">
+        <a href="#problema">Problema</a>
+        <a href="#solucao">Solução</a>
+        <a href="#como-funciona">Como funciona</a>
+        <a href="#funcionalidades">Funcionalidades</a>
+        <a href="#tecnologias">Tecnologias</a>
+        <a href="#equipe">Equipe</a>
+        <a href="https://github.com/kaikdev/smart-gym" class="botao botao--pequeno" target="_blank" rel="noopener">GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="inicio">
+      <div class="hero__brilho" aria-hidden="true"></div>
+      <div class="container hero__grade">
+        <div class="hero__texto">
+          <span class="selo revelar"><span class="ponto-vivo"></span>Projeto acadêmico · FATEC · DSM</span>
+          <h1 class="revelar">A academia que sabe <span class="destaque">quais aparelhos estão livres</span>.</h1>
+          <p class="hero__descricao revelar">O Smart Gym une software multiplataforma e IoT: sensores de presença nos equipamentos informam em tempo real se cada aparelho está livre ou em uso, enquanto o sistema centraliza alunos, planos, treinos, avaliações, agendamentos e pagamentos.</p>
+          <div class="hero__acoes revelar">
+            <a href="#como-funciona" class="botao">Ver como funciona</a>
+            <a href="https://github.com/kaikdev/smart-gym" class="botao botao--secundario" target="_blank" rel="noopener">Código no GitHub</a>
+          </div>
+          <ul class="hero__plataformas revelar" aria-label="Plataformas">
+            <li>Android</li>
+            <li>Desktop</li>
+            <li>Web</li>
+            <li>ESP32</li>
+          </ul>
+        </div>
+
+        <div class="painel revelar" aria-label="Simulação do painel de equipamentos">
+          <div class="painel__topo">
+            <div>
+              <strong>Equipamentos</strong>
+              <small>Atualizado pelos sensores</small>
+            </div>
+            <span class="painel__ao-vivo"><span class="ponto-vivo"></span>ao vivo</span>
+          </div>
+          <ul class="painel__lista" id="painelLista"></ul>
+          <div class="painel__rodape">
+            <span><b id="painelLivres">0</b> livres</span>
+            <span><b id="painelUso">0</b> em uso</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="numeros">
+      <div class="container numeros__grade">
+        <div class="numero revelar"><strong data-contador="8">0</strong><span>entidades com CRUD completo</span></div>
+        <div class="numero revelar"><strong data-contador="3">0</strong><span>plataformas com o mesmo código</span></div>
+        <div class="numero revelar"><strong data-contador="2">0</strong><span>segundos entre leituras do sensor</span></div>
+        <div class="numero revelar"><strong data-contador="3">0</strong><span>ODS da ONU contemplados</span></div>
+      </div>
+    </section>
+
+    <section class="secao" id="problema">
+      <div class="container">
+        <header class="secao__cabecalho revelar">
+          <span class="rotulo">O problema</span>
+          <h2>Academias ainda funcionam no escuro.</h2>
+          <p>O aluno só descobre que o aparelho está ocupado quando chega nele. A gestão depende de planilhas, cadernos e da memória da equipe.</p>
+        </header>
+        <div class="cartoes cartoes--5">
+          <article class="cartao revelar">
+            <div class="cartao__icone" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 7v5l3 2"/><circle cx="12" cy="12" r="9"/></svg></div>
+            <h3>Filas e espera</h3>
+            <p>Sem saber o que está ocupado, o aluno perde tempo andando pela academia e esperando aparelhos.</p>
+          </article>
+          <article class="cartao revelar">
+            <div class="cartao__icone" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M17 20v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2"/><circle cx="10" cy="7" r="4"/><path d="M21 20v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8"/></svg></div>
+            <h3>Lotação nos horários de pico</h3>
+            <p>Sem agendamento, todo mundo chega ao mesmo tempo e o espaço fica superlotado.</p>
+          </article>
+          <article class="cartao revelar">
+            <div class="cartao__icone" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></svg></div>
+            <h3>Controle manual</h3>
+            <p>Planos, pagamentos e cadastros espalhados em planilhas e cadernos, sem segurança nem histórico.</p>
+          </article>
+          <article class="cartao revelar">
+            <div class="cartao__icone" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="m7 15 4-4 3 3 5-6"/></svg></div>
+            <h3>Evolução invisível</h3>
+            <p>Treinos e avaliações físicas não ficam registrados, e fica difícil ajustar o treino com base em dados.</p>
+          </article>
+          <article class="cartao revelar">
+            <div class="cartao__icone" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.8-3.8a6 6 0 0 1-7.9 7.9l-6.9 6.9a2.1 2.1 0 0 1-3-3l6.9-6.9a6 6 0 0 1 7.9-7.9z"/></svg></div>
+            <h3>Equipamentos sem dados</h3>
+            <p>Ninguém sabe quais aparelhos são mais ou menos usados, o que atrapalha a manutenção e as novas compras.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="secao secao--alternada" id="solucao">
+      <div class="container solucao">
+        <header class="secao__cabecalho secao__cabecalho--esquerda revelar">
+          <span class="rotulo">A solução</span>
+          <h2>Um sistema único, conectado aos aparelhos.</h2>
+          <p>O Smart Gym centraliza a gestão da academia em um aplicativo para celular, computador e navegador, e coloca um sensor de presença em cada equipamento.</p>
+          <ul class="lista-check">
+            <li>Status de cada aparelho em tempo real, vindo dos sensores</li>
+            <li>Cadastro de alunos, planos, pagamentos e agendamentos</li>
+            <li>Fichas de treino, exercícios e avaliações físicas</li>
+            <li>Acesso protegido por login com token JWT</li>
+            <li>Perfis separados: administrador gerencia, aluno consulta</li>
+          </ul>
+        </header>
+        <div class="objetivos">
+          <article class="objetivo revelar">
+            <span class="objetivo__numero">01</span>
+            <h3>Objetivo geral</h3>
+            <p>Desenvolver um sistema de gestão inteligente para academias que integre software multiplataforma e dispositivos IoT, informando em tempo real a disponibilidade dos equipamentos.</p>
+          </article>
+          <article class="objetivo revelar">
+            <span class="objetivo__numero">02</span>
+            <h3>Objetivos específicos</h3>
+            <p>Construir uma API REST segura em Spring Boot, um aplicativo Kotlin Multiplatform para Android, Desktop e Web e um dispositivo ESP32 que publica leituras via MQTT.</p>
+          </article>
+          <article class="objetivo revelar">
+            <span class="objetivo__numero">03</span>
+            <h3>Justificativa</h3>
+            <p>Pequenas e médias academias raramente têm acesso a soluções de tecnologia acessíveis. Dados reais de uso melhoram a experiência do aluno e apoiam as decisões da gestão.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="secao" id="como-funciona">
+      <div class="container">
+        <header class="secao__cabecalho revelar">
+          <span class="rotulo">Como funciona</span>
+          <h2>Do movimento no aparelho até a tela do aluno.</h2>
+          <p>Cada leitura do sensor percorre um caminho de ponta a ponta, em poucos segundos.</p>
+        </header>
+
+        <ol class="fluxo revelar" aria-label="Fluxo dos dados do sensor">
+          <li class="fluxo__etapa">
+            <div class="fluxo__icone" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="5" y="5" width="14" height="14" rx="2"/><path d="M9 9h6v6H9zM9 2v3M15 2v3M9 19v3M15 19v3M2 9h3M2 15h3M19 9h3M19 15h3"/></svg></div>
+            <h3>ESP32 + PIR</h3>
+            <p>O sensor de presença detecta movimento no aparelho.</p>
+          </li>
+          <li class="fluxo__etapa">
+            <div class="fluxo__icone" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12.6a10 10 0 0 1 14 0M8.5 16.1a5 5 0 0 1 7 0M2 9a15 15 0 0 1 20 0"/><circle cx="12" cy="20" r="1"/></svg></div>
+            <h3>Broker MQTT</h3>
+            <p>A leitura é publicada via Wi-Fi em um tópico do broker.</p>
+          </li>
+          <li class="fluxo__etapa">
+            <div class="fluxo__icone" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m18 16 4-4-4-4M6 8l-4 4 4 4M14.5 4l-5 16"/></svg></div>
+            <h3>Spring Boot</h3>
+            <p>Um listener assina o tópico e processa cada mensagem.</p>
+          </li>
+          <li class="fluxo__etapa">
+            <div class="fluxo__icone" aria-hidden="true"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14c0 1.7 4 3 9 3s9-1.3 9-3V5M3 12c0 1.7 4 3 9 3s9-1.3 9-3"/></svg></div>
+            <h3>MySQL</h3>
+            <p>A leitura é gravada e o status do equipamento é atualizado.</p>
+          </li>
+          <li class="fluxo__etapa">
+            <div class="fluxo__icone" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="2" y="4" width="14" height="10" rx="2"/><rect x="15" y="8" width="7" height="12" rx="1.5"/><path d="M6 18h6"/></svg></div>
+            <h3>App</h3>
+            <p>O aluno vê no app quais aparelhos estão livres ou em uso.</p>
+          </li>
+        </ol>
+
+        <div class="codigo-grade">
+          <figure class="codigo revelar">
+            <figcaption>Mensagem publicada pelo ESP32</figcaption>
+            <pre><code><span class="c-pontuacao">{</span>
+  <span class="c-chave">"codigoSensor"</span><span class="c-pontuacao">:</span> <span class="c-texto">"SENSOR-001"</span><span class="c-pontuacao">,</span>
+  <span class="c-chave">"emUso"</span><span class="c-pontuacao">:</span> <span class="c-valor" id="codigoEmUso">true</span>
+<span class="c-pontuacao">}</span></code></pre>
+          </figure>
+          <figure class="codigo revelar">
+            <figcaption>Tópico MQTT</figcaption>
+            <pre><code><span class="c-texto">fatec-dsm/smartgym/sensores/presenca</span></code></pre>
+            <figcaption>Consulta das leituras na API</figcaption>
+            <pre><code><span class="c-valor">GET</span> /api/leituras-sensor
+<span class="c-valor">GET</span> /api/leituras-sensor/sensor/<span class="c-chave">{codigo}</span></code></pre>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="secao secao--alternada" id="funcionalidades">
+      <div class="container">
+        <header class="secao__cabecalho revelar">
+          <span class="rotulo">Funcionalidades</span>
+          <h2>Tudo o que a academia precisa, em um só lugar.</h2>
+          <p>Oito entidades com cadastro, listagem, edição e exclusão, além do registro automático das leituras dos sensores.</p>
+        </header>
+        <div class="entidades">
+          <article class="entidade revelar"><span class="entidade__tag">Usuários</span><p>Alunos e administradores, com login seguro e senha criptografada.</p></article>
+          <article class="entidade revelar"><span class="entidade__tag">Planos</span><p>Mensal, trimestral ou anual, com valor, duração e taxa de matrícula.</p></article>
+          <article class="entidade revelar"><span class="entidade__tag">Exercícios</span><p>Grupo muscular, séries, repetições e carga recomendada.</p></article>
+          <article class="entidade revelar entidade--iot"><span class="entidade__tag">Equipamentos</span><p>Fabricante, carga suportada e o status livre ou em uso vindo do sensor IoT.</p></article>
+          <article class="entidade revelar"><span class="entidade__tag">Treinos</span><p>Fichas de treino com objetivo, data de início e duração.</p></article>
+          <article class="entidade revelar"><span class="entidade__tag">Avaliações físicas</span><p>Altura, peso, IMC e percentual de gordura para acompanhar a evolução.</p></article>
+          <article class="entidade revelar"><span class="entidade__tag">Agendamentos</span><p>Aulas coletivas com instrutor, data, horário e capacidade máxima.</p></article>
+          <article class="entidade revelar"><span class="entidade__tag">Pagamentos</span><p>Mensalidades com valor, forma de pagamento e situação.</p></article>
+          <article class="entidade revelar entidade--iot"><span class="entidade__tag">Leituras do sensor</span><p>Histórico de cada leitura recebida via MQTT, gravado automaticamente.</p></article>
+        </div>
+
+        <div class="perfis">
+          <article class="perfil revelar">
+            <h3><span class="perfil__selo">Administrador</span></h3>
+            <ul>
+              <li>Cadastra, edita e exclui todos os registros</li>
+              <li>Gerencia usuários e pagamentos</li>
+              <li>Define quem é administrador</li>
+            </ul>
+          </article>
+          <article class="perfil perfil--aluno revelar">
+            <h3><span class="perfil__selo">Aluno</span></h3>
+            <ul>
+              <li>Cria a própria conta pela tela de registro</li>
+              <li>Consulta equipamentos, treinos, exercícios, avaliações, planos e agendamentos</li>
+              <li>Vê em tempo real quais aparelhos estão livres</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="secao" id="tecnologias">
+      <div class="container">
+        <header class="secao__cabecalho revelar">
+          <span class="rotulo">Tecnologias</span>
+          <h2>Kotlin de ponta a ponta.</h2>
+          <p>A mesma linguagem no backend e no aplicativo, com um dispositivo IoT conectado por MQTT.</p>
+        </header>
+        <div class="tecnologias">
+          <article class="tecnologia revelar">
+            <h3>Backend</h3>
+            <ul class="chips">
+              <li>Kotlin</li><li>Spring Boot 4</li><li>Spring Security</li><li>JWT</li><li>Spring Data JPA</li><li>Bean Validation</li><li>MySQL 8</li><li>Swagger</li>
+            </ul>
+          </article>
+          <article class="tecnologia revelar">
+            <h3>Frontend</h3>
+            <ul class="chips">
+              <li>Kotlin Multiplatform</li><li>Compose Multiplatform</li><li>Material 3</li><li>Navigation3</li><li>Ktor Client</li><li>ViewModel</li><li>Material Icons</li>
+            </ul>
+          </article>
+          <article class="tecnologia revelar">
+            <h3>IoT</h3>
+            <ul class="chips">
+              <li>ESP32</li><li>Sensor PIR HC-SR501</li><li>MQTT</li><li>PubSubClient</li><li>Eclipse Paho</li><li>Wokwi</li>
+            </ul>
+          </article>
+          <article class="tecnologia revelar">
+            <h3>Infraestrutura</h3>
+            <ul class="chips">
+              <li>Docker</li><li>Docker Compose</li><li>Gradle</li><li>Git</li><li>GitHub</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="secao secao--alternada" id="ods">
+      <div class="container">
+        <header class="secao__cabecalho revelar">
+          <span class="rotulo">Impacto</span>
+          <h2>Alinhado aos Objetivos de Desenvolvimento Sustentável.</h2>
+        </header>
+        <div class="ods">
+          <article class="ods__cartao revelar" style="--cor-ods: #4C9F38">
+            <span class="ods__numero">3</span>
+            <h3>Saúde e Bem-Estar</h3>
+            <p>Incentiva e organiza a prática regular de atividade física, com acompanhamento por treinos e avaliações.</p>
+          </article>
+          <article class="ods__cartao revelar" style="--cor-ods: #FD6925">
+            <span class="ods__numero">9</span>
+            <h3>Indústria, Inovação e Infraestrutura</h3>
+            <p>Leva IoT e software multiplataforma para a gestão de pequenas e médias academias.</p>
+          </article>
+          <article class="ods__cartao revelar" style="--cor-ods: #BF8B2E">
+            <span class="ods__numero">12</span>
+            <h3>Consumo e Produção Responsáveis</h3>
+            <p>O monitoramento de uso apoia a manutenção preventiva e evita compras desnecessárias.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="secao" id="equipe">
+      <div class="container">
+        <header class="secao__cabecalho revelar">
+          <span class="rotulo">Equipe</span>
+          <h2>Quem construiu o Smart Gym.</h2>
+          <p>Cada integrante foi responsável por duas entidades, do backend ao aplicativo.</p>
+        </header>
+        <div class="equipe">
+          <article class="membro revelar">
+            <span class="membro__avatar" aria-hidden="true">KS</span>
+            <h3>Kaik Silva Sousa</h3>
+            <p>Usuário e Plano</p>
+          </article>
+          <article class="membro revelar">
+            <span class="membro__avatar" aria-hidden="true">RG</span>
+            <h3>Robert Guimarães Silva</h3>
+            <p>Exercício e Equipamento</p>
+          </article>
+          <article class="membro revelar">
+            <span class="membro__avatar" aria-hidden="true">GV</span>
+            <h3>Gabriel Vasques de Abreu</h3>
+            <p>Treino e Avaliação Física</p>
+          </article>
+          <article class="membro revelar">
+            <span class="membro__avatar" aria-hidden="true">AM</span>
+            <h3>Andrey de Mendonça</h3>
+            <p>Agendamento e Pagamento</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="chamada">
+      <div class="container chamada__conteudo revelar">
+        <img src="logo.svg" alt="" width="64" height="64">
+        <h2>Conheça o código do projeto.</h2>
+        <p>Backend, aplicativo multiplataforma e dispositivo IoT, todos no mesmo repositório.</p>
+        <a href="https://github.com/kaikdev/smart-gym" class="botao" target="_blank" rel="noopener">Acessar repositório</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="rodape">
+    <div class="container rodape__conteudo">
+      <span>Smart Gym · FATEC · Desenvolvimento de Software Multiplataforma · Laboratório de Desenvolvimento Multiplataforma</span>
+      <span>© <span id="ano">2026</span></span>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
