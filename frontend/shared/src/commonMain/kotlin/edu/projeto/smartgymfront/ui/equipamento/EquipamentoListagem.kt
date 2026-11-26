@@ -1,10 +1,17 @@
 package edu.projeto.smartgymfront.ui.equipamento
 
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Refresh
+import androidx.compose.material3.Icon
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
+import edu.projeto.smartgymfront.sessao.SessaoUsuario
 import edu.projeto.smartgymfront.ui.componentes.CardRegistro
 import edu.projeto.smartgymfront.ui.componentes.Mensagem
 import edu.projeto.smartgymfront.ui.componentes.Tela
@@ -19,8 +26,14 @@ fun EquipamentoListagem(
     aoVoltar: () -> Unit
 ) {
     Tela("Equipamentos", aoVoltar) {
-        Button(onClick = aoNovo, modifier = Modifier.fillMaxWidth()) {
-            Text("Novo equipamento")
+        if (SessaoUsuario.admin) {
+            Button(onClick = aoNovo, modifier = Modifier.fillMaxWidth()) {
+                Text("Novo equipamento")
+            }
+        }
+        OutlinedButton(onClick = viewModel::carregar, modifier = Modifier.fillMaxWidth()) {
+            Icon(Icons.Filled.Refresh, contentDescription = null)
+            Text("Atualizar status dos equipamentos", modifier = Modifier.padding(start = 8.dp))
         }
         Mensagem(viewModel.mensagem, viewModel.sucesso)
         if (viewModel.lista.isEmpty()) Text("Nenhum registro encontrado.")

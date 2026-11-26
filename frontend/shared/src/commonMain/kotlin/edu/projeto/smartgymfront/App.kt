@@ -1,7 +1,6 @@
 package edu.projeto.smartgymfront
 
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -25,6 +24,7 @@ import edu.projeto.smartgymfront.ui.equipamento.EquipamentoCrud
 import edu.projeto.smartgymfront.ui.exercicio.ExercicioCrud
 import edu.projeto.smartgymfront.ui.pagamento.PagamentoCrud
 import edu.projeto.smartgymfront.ui.plano.PlanoCrud
+import edu.projeto.smartgymfront.ui.tema.TemaSmartGym
 import edu.projeto.smartgymfront.ui.treino.TreinoCrud
 import edu.projeto.smartgymfront.ui.usuario.UsuarioCrud
 
@@ -51,7 +51,7 @@ fun App() {
         if (!SessaoUsuario.autenticado && !telaPublica) reiniciar(Rota.Login)
     }
 
-    MaterialTheme {
+    TemaSmartGym {
         Surface(modifier = Modifier.fillMaxSize()) {
             NavDisplay(
                 backStack = pilha,

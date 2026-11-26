@@ -11,5 +11,6 @@ data class Usuario(
     val senha: String? = null,
     val dataNascimento: LocalDate? = null,
     val pesoAtual: Float? = null,
-    val ativo: Boolean = true
+    val ativo: Boolean = true,
+    val perfil: String = "ALUNO"
 )

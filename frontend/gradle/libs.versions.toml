@@ -36,6 +36,7 @@ androidx-lifecycle-runtimeCompose = { module = "org.jetbrains.androidx.lifecycle
 androidx-lifecycle-viewmodelNavigation3 = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-navigation3", version.ref = "androidx-lifecycle" }
 navigation3-ui = { module = "org.jetbrains.androidx.navigation3:navigation3-ui", version.ref = "navigation3" }
 compose-materialIconsCore = { module = "org.jetbrains.compose.material:material-icons-core", version.ref = "material-icons" }
+compose-materialIconsExtended = { module = "org.jetbrains.compose.material:material-icons-extended", version.ref = "material-icons" }
 compose-runtime = { module = "org.jetbrains.compose.runtime:runtime", version.ref = "composeMultiplatform" }
 compose-foundation = { module = "org.jetbrains.compose.foundation:foundation", version.ref = "composeMultiplatform" }
 compose-material3 = { module = "org.jetbrains.compose.material3:material3", version.ref = "material3" }

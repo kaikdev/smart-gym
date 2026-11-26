@@ -17,6 +17,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import edu.projeto.smartgymfront.sessao.SessaoUsuario
 
 @Composable
 fun CardRegistro(
@@ -31,11 +32,13 @@ fun CardRegistro(
                 Text(titulo, style = MaterialTheme.typography.titleMedium)
                 campos.forEach { Text(it) }
             }
-            IconButton(onClick = aoEditar) {
-                Icon(Icons.Filled.Edit, contentDescription = "Editar")
-            }
-            IconButton(onClick = aoApagar) {
-                Icon(Icons.Filled.Delete, contentDescription = "Apagar", tint = MaterialTheme.colorScheme.error)
+            if (SessaoUsuario.admin) {
+                IconButton(onClick = aoEditar) {
+                    Icon(Icons.Filled.Edit, contentDescription = "Editar")
+                }
+                IconButton(onClick = aoApagar) {
+                    Icon(Icons.Filled.Delete, contentDescription = "Apagar", tint = MaterialTheme.colorScheme.error)
+                }
             }
         }
     }

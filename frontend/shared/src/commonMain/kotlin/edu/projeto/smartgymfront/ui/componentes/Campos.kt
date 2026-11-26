@@ -12,14 +12,23 @@ import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Visibility
+import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.material3.Button
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
@@ -37,6 +46,8 @@ fun CampoTexto(
     teclado: KeyboardType = KeyboardType.Text,
     dica: String? = null
 ) {
+    var mostrarSenha by remember { mutableStateOf(false) }
+
     OutlinedTextField(
         value = valor,
         onValueChange = aoMudar,
@@ -45,7 +56,17 @@ fun CampoTexto(
         isError = erro != null,
         supportingText = if (erro != null) { { Text(erro) } } else null,
         singleLine = true,
-        visualTransformation = if (senha) PasswordVisualTransformation() else VisualTransformation.None,
+        visualTransformation = if (senha && !mostrarSenha) PasswordVisualTransformation() else VisualTransformation.None,
+        trailingIcon = if (senha) {
+            {
+                IconButton(onClick = { mostrarSenha = !mostrarSenha }) {
+                    Icon(
+                        if (mostrarSenha) Icons.Filled.VisibilityOff else Icons.Filled.Visibility,
+                        contentDescription = if (mostrarSenha) "Ocultar senha" else "Mostrar senha"
+                    )
+                }
+            }
+        } else null,
         keyboardOptions = KeyboardOptions(keyboardType = if (senha) KeyboardType.Password else teclado),
         modifier = Modifier.fillMaxWidth()
     )

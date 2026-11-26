@@ -5,6 +5,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import edu.projeto.smartgymfront.sessao.SessaoUsuario
 import edu.projeto.smartgymfront.ui.componentes.CardRegistro
 import edu.projeto.smartgymfront.ui.componentes.Mensagem
 import edu.projeto.smartgymfront.ui.componentes.Tela
@@ -19,8 +20,10 @@ fun TreinoListagem(
     aoVoltar: () -> Unit
 ) {
     Tela("Treinos", aoVoltar) {
-        Button(onClick = aoNovo, modifier = Modifier.fillMaxWidth()) {
-            Text("Novo treino")
+        if (SessaoUsuario.admin) {
+            Button(onClick = aoNovo, modifier = Modifier.fillMaxWidth()) {
+                Text("Novo treino")
+            }
         }
         Mensagem(viewModel.mensagem, viewModel.sucesso)
         if (viewModel.lista.isEmpty()) Text("Nenhum registro encontrado.")

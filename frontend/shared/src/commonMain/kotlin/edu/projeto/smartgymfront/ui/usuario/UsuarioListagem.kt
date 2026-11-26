@@ -5,6 +5,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import edu.projeto.smartgymfront.sessao.SessaoUsuario
 import edu.projeto.smartgymfront.ui.componentes.CardRegistro
 import edu.projeto.smartgymfront.ui.componentes.Mensagem
 import edu.projeto.smartgymfront.ui.componentes.Tela
@@ -19,8 +20,10 @@ fun UsuarioListagem(
     aoVoltar: () -> Unit
 ) {
     Tela("Usuários", aoVoltar) {
-        Button(onClick = aoNovo, modifier = Modifier.fillMaxWidth()) {
-            Text("Novo usuário")
+        if (SessaoUsuario.admin) {
+            Button(onClick = aoNovo, modifier = Modifier.fillMaxWidth()) {
+                Text("Novo usuário")
+            }
         }
         Mensagem(viewModel.mensagem, viewModel.sucesso)
         if (viewModel.lista.isEmpty()) Text("Nenhum registro encontrado.")
@@ -32,7 +35,7 @@ fun UsuarioListagem(
                     "E-mail: ${item.email}",
                     "Nascimento: ${dataParaTexto(item.dataNascimento).ifBlank { "-" }}",
                     "Peso: ${item.pesoAtual?.let { "$it kg" } ?: "-"}",
-                    "Situação: ${if (item.ativo) "Ativo" else "Inativo"}"
+                    "Situação: ${if (item.ativo) "Ativo" else "Inativo"} | Perfil: ${if (item.perfil == "ADMIN") "Administrador" else "Aluno"}"
                 ),
                 aoEditar = { aoEditar(id) },
                 aoApagar = { viewModel.apagar(id) }

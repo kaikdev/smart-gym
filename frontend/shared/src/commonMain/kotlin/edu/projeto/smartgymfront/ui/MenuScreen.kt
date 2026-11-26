@@ -22,10 +22,13 @@ fun MenuScreen(aoAbrir: (Rota) -> Unit, aoSair: () -> Unit) {
         "Exercícios" to Rota.Exercicios,
         "Equipamentos" to Rota.Equipamentos
     )
+    val somenteAdmin = listOf(Rota.Usuarios, Rota.Pagamentos)
+    val visiveis = if (SessaoUsuario.admin) opcoes else opcoes.filter { it.second !in somenteAdmin }
+    val perfil = if (SessaoUsuario.admin) "Administrador" else "Aluno"
 
     Tela("Smart Gym") {
-        Text("Logado como: ${SessaoUsuario.email ?: ""}")
-        opcoes.forEach { (titulo, rota) ->
+        Text("Logado como: ${SessaoUsuario.email ?: ""} ($perfil)")
+        visiveis.forEach { (titulo, rota) ->
             Button(onClick = { aoAbrir(rota) }, modifier = Modifier.fillMaxWidth()) {
                 Text(titulo)
             }

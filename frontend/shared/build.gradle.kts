@@ -62,6 +62,7 @@ kotlin {
             implementation(libs.androidx.lifecycle.viewmodelNavigation3)
             implementation(libs.navigation3.ui)
             implementation(libs.compose.materialIconsCore)
+            implementation(libs.compose.materialIconsExtended)
             implementation(libs.ktor.client.core)
             implementation(libs.ktor.client.contentNegotiation)
             implementation(libs.ktor.serialization.kotlinxJson)

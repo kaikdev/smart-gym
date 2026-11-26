@@ -22,6 +22,7 @@ class UsuarioViewModel(private val repositorio: UsuarioRepositorioRemoto) : View
     var dataNascimento by mutableStateOf("")
     var pesoAtual by mutableStateOf("")
     var ativo by mutableStateOf(true)
+    var administrador by mutableStateOf(false)
 
     var lista by mutableStateOf(listOf<Usuario>())
         private set
@@ -57,6 +58,7 @@ class UsuarioViewModel(private val repositorio: UsuarioRepositorioRemoto) : View
         dataNascimento = ""
         pesoAtual = ""
         ativo = true
+        administrador = false
         idEdicao = null
         erros = emptyMap()
         mensagem = null
@@ -73,6 +75,7 @@ class UsuarioViewModel(private val repositorio: UsuarioRepositorioRemoto) : View
                 dataNascimento = dataParaTexto(registro.dataNascimento)
                 pesoAtual = registro.pesoAtual?.toString() ?: ""
                 ativo = registro.ativo
+                administrador = registro.perfil == "ADMIN"
                 idEdicao = id
             } catch (e: ApiException) {
                 mostrarErro(e)
@@ -145,7 +148,8 @@ class UsuarioViewModel(private val repositorio: UsuarioRepositorioRemoto) : View
             senha = senha,
             dataNascimento = data,
             pesoAtual = peso,
-            ativo = ativo
+            ativo = ativo,
+            perfil = if (administrador) "ADMIN" else "ALUNO"
         )
     }
 

@@ -34,6 +34,7 @@ fun UsuarioFormulario(viewModel: UsuarioViewModel, aoVoltar: () -> Unit) {
         )
         CampoTexto("Peso atual (kg)", viewModel.pesoAtual, { viewModel.pesoAtual = it }, viewModel.erros["pesoAtual"], teclado = KeyboardType.Decimal)
         CampoCheckbox("Ativo", viewModel.ativo) { viewModel.ativo = it }
+        CampoCheckbox("Administrador", viewModel.administrador) { viewModel.administrador = it }
         Mensagem(viewModel.mensagem, viewModel.sucesso)
         BotoesFormulario(
             aoGravar = { viewModel.gravar(aoConcluir = aoVoltar) },

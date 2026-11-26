@@ -12,16 +12,24 @@ object SessaoUsuario {
     var email by mutableStateOf<String?>(null)
         private set
 
+    var perfil by mutableStateOf<String?>(null)
+        private set
+
     val autenticado: Boolean
         get() = token != null
 
-    fun iniciar(token: String, email: String) {
+    val admin: Boolean
+        get() = perfil == "ADMIN"
+
+    fun iniciar(token: String, email: String, perfil: String) {
         this.token = token
         this.email = email
+        this.perfil = perfil
     }
 
     fun encerrar() {
         token = null
         email = null
+        perfil = null
     }
 }

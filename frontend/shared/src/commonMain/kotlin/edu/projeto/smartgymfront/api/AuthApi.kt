@@ -10,18 +10,18 @@ data class LoginRequest(val email: String, val senha: String)
 data class RegisterRequest(val nome: String, val email: String, val senha: String)
 
 @Serializable
-data class TokenResponse(val token: String, val tipo: String = "Bearer")
+data class TokenResponse(val token: String, val perfil: String = "ALUNO", val tipo: String = "Bearer")
 
 object AuthApi {
 
     suspend fun entrar(email: String, senha: String) {
         val resposta: TokenResponse = ApiClient.criar("api/auth/login", LoginRequest(email, senha))
-        SessaoUsuario.iniciar(resposta.token, email)
+        SessaoUsuario.iniciar(resposta.token, email, resposta.perfil)
     }
 
     suspend fun registrar(nome: String, email: String, senha: String) {
         val resposta: TokenResponse = ApiClient.criar("api/auth/register", RegisterRequest(nome, email, senha))
-        SessaoUsuario.iniciar(resposta.token, email)
+        SessaoUsuario.iniciar(resposta.token, email, resposta.perfil)
     }
 
     fun sair() {
