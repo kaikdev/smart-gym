@@ -113,8 +113,10 @@ Nenhuma variável é obrigatória: os valores padrão ficam em `src/main/resourc
 
 | Perfil | E-mail | Senha | Observação |
 |---|---|---|---|
-| Administrador | `admin@smartgym.com` | `admin123` | Criado automaticamente na primeira execução |
-| Aluno | `aluno@smartgym.com` | `aluno123` | Exemplo: crie com `POST /api/auth/register` ou pela tela de registro do app |
+| Administrador | `admin@smartgym.com` | `admin123` | Já vem pronto: o backend cria esse usuário automaticamente ao iniciar, caso ele ainda não exista no banco (classe `config/CargaInicial.kt`) |
+| Aluno | `aluno@smartgym.com` | `aluno123` | Não vem pronto: crie com `POST /api/auth/register` ou pela tela de registro do app antes de usar |
+
+O administrador é o único usuário que já vem cadastrado. As demais contas criadas pelo registro (`POST /api/auth/register`) sempre recebem o perfil Aluno; para tornar alguém administrador, entre como admin, edite a pessoa em **Usuários** e marque **Administrador**.
 
 ## 10. Instruções para execução
 

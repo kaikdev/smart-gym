@@ -68,7 +68,7 @@ A `LeituraSensor` não tem CRUD no frontend: ela é gravada automaticamente pelo
 
 | Perfil | Como é criado | O que pode fazer |
 |---|---|---|
-| **Administrador** (`ADMIN`) | Criado automaticamente ao iniciar o backend, ou marcado como "Administrador" no cadastro de usuários | Tudo: cadastrar, editar e excluir todos os registros, incluindo usuários e pagamentos |
+| **Administrador** (`ADMIN`) | `admin@smartgym.com` é criado automaticamente ao iniciar o backend. Outros usuários podem ser marcados como "Administrador" no cadastro de usuários | Tudo: cadastrar, editar e excluir todos os registros, incluindo usuários e pagamentos |
 | **Aluno** (`ALUNO`) | Pela tela de registro do app (`POST /api/auth/register`) | Apenas consultar equipamentos (livre/em uso), exercícios, treinos, avaliações, planos e agendamentos. Não vê usuários nem pagamentos |
 
 A regra é aplicada no backend (Spring Security responde `403` para ações não permitidas) e no frontend (menu e botões de criar, editar e apagar ficam ocultos para o aluno).
@@ -77,8 +77,10 @@ A regra é aplicada no backend (Spring Security responde `403` para ações não
 
 | Perfil | E-mail | Senha | Observação |
 |---|---|---|---|
-| Administrador | `admin@smartgym.com` | `admin123` | Criado automaticamente na primeira execução do backend |
-| Aluno | `aluno@smartgym.com` | `aluno123` | Exemplo: crie pela tela **Ir para o registro** do app |
+| Administrador | `admin@smartgym.com` | `admin123` | Já vem pronto: o backend cria esse usuário automaticamente ao iniciar, caso ele ainda não exista no banco |
+| Aluno | `aluno@smartgym.com` | `aluno123` | Não vem pronto: crie pela tela **Ir para o registro** do app antes de usar |
+
+O administrador é o único usuário que já vem cadastrado. As demais contas criadas pela tela de registro sempre recebem o perfil Aluno; para tornar alguém administrador, entre como admin, edite a pessoa em **Usuários** e marque **Administrador**.
 
 ## 7. Tecnologias utilizadas
 
@@ -207,9 +209,10 @@ Abra o projeto no Wokwi, inicie a simulação e acione o sensor. O passo a passo
 
 ### Primeiro acesso
 
-1. Entre com o administrador (`admin@smartgym.com` / `admin123`) ou clique em **Ir para o registro** para criar uma conta de aluno. O registro já devolve o token e abre o menu.
-2. O backend devolve um token JWT, exigido em todas as rotas, exceto as de autenticação.
-3. No Swagger: faça `POST /api/auth/login`, copie o `token`, clique em **Authorize** e cole o token. A partir daí as demais rotas podem ser testadas.
+1. Não é preciso cadastrar o administrador: ao iniciar, o backend cria `admin@smartgym.com` / `admin123` se ele ainda não existir. Entre com esse usuário para ter acesso completo.
+2. Para testar o perfil de aluno, clique em **Ir para o registro** e crie uma conta (por exemplo, `aluno@smartgym.com` / `aluno123`). O registro sempre cria um aluno, já devolve o token e abre o menu.
+3. O backend devolve um token JWT, exigido em todas as rotas, exceto as de autenticação.
+4. No Swagger: faça `POST /api/auth/login`, copie o `token`, clique em **Authorize** e cole o token. A partir daí as demais rotas podem ser testadas.
 
 ### Teste completo com o sensor
 

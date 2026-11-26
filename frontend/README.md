@@ -81,8 +81,10 @@ A versão Web precisa rodar em `http://localhost:3000`, que é a origem liberada
 
 | Perfil | E-mail | Senha | Observação |
 |---|---|---|---|
-| Administrador | `admin@smartgym.com` | `admin123` | Criado automaticamente pelo backend |
-| Aluno | `aluno@smartgym.com` | `aluno123` | Exemplo: crie pela tela **Ir para o registro** |
+| Administrador | `admin@smartgym.com` | `admin123` | Já vem pronto: o backend cria esse usuário automaticamente ao iniciar, caso ele ainda não exista no banco |
+| Aluno | `aluno@smartgym.com` | `aluno123` | Não vem pronto: crie pela tela **Ir para o registro** antes de usar |
+
+O administrador é o único usuário que já vem cadastrado. As demais contas criadas pela tela de registro sempre recebem o perfil Aluno; para tornar alguém administrador, entre como admin, edite a pessoa em **Usuários** e marque **Administrador**.
 
 ## 8. Instruções para execução
 

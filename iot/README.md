@@ -115,10 +115,12 @@ O dispositivo não usa variáveis de ambiente. As configurações são constante
 
 O dispositivo não tem login: o broker HiveMQ público não exige usuário nem senha. Para conferir as leituras no sistema:
 
-| Perfil | E-mail | Senha |
-|---|---|---|
-| Administrador | `admin@smartgym.com` | `admin123` |
-| Aluno | `aluno@smartgym.com` | `aluno123` (crie pela tela de registro do app) |
+| Perfil | E-mail | Senha | Observação |
+|---|---|---|---|
+| Administrador | `admin@smartgym.com` | `admin123` | Já vem pronto: o backend cria esse usuário automaticamente ao iniciar, caso ele ainda não exista no banco |
+| Aluno | `aluno@smartgym.com` | `aluno123` | Não vem pronto: crie pela tela **Ir para o registro** do app antes de usar |
+
+Para cadastrar o equipamento ligado ao sensor (`SENSOR-001`), use o administrador.
 
 ## 9. Instruções para execução
 
