@@ -16,6 +16,7 @@ const uint8_t PINO_LED = 2;
 
 const unsigned long INTERVALO_ENVIO_MS = 2000;
 const unsigned long INTERVALO_RECONEXAO_MS = 3000;
+const unsigned long TEMPO_EM_USO_MS = 30000;
 
 WiFiClient wifiClient;
 PubSubClient mqttClient(wifiClient);
@@ -25,6 +26,8 @@ bool ultimoEstado = false;
 bool primeiraLeitura = true;
 unsigned long ultimoEnvio = 0;
 unsigned long ultimaTentativaMqtt = 0;
+unsigned long ultimoMovimento = 0;
+bool movimentoDetectado = false;
 
 void conectarWiFi() {
   Serial.print("Conectando ao Wi-Fi ");
@@ -84,10 +87,15 @@ void setup() {
 }
 
 void loop() {
-  bool emUso = digitalRead(PINO_PIR) == HIGH;
-  digitalWrite(PINO_LED, emUso);
-
   unsigned long agora = millis();
+
+  if (digitalRead(PINO_PIR) == HIGH) {
+    ultimoMovimento = agora;
+    movimentoDetectado = true;
+  }
+
+  bool emUso = movimentoDetectado && agora - ultimoMovimento < TEMPO_EM_USO_MS;
+  digitalWrite(PINO_LED, emUso);
 
   if (WiFi.status() != WL_CONNECTED) {
     return;
