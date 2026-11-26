@@ -2,6 +2,7 @@ package com.smartgym.backend.security
 
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.http.HttpMethod
 import org.springframework.http.HttpStatus
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration
@@ -38,7 +39,9 @@ class SecurityConfig(private val jwtAuthenticationFilter: JwtAuthenticationFilte
                 it
                     .requestMatchers("/api/auth/login", "/api/auth/register", "/error").permitAll()
                     .requestMatchers("/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs/**").permitAll()
-                    .anyRequest().authenticated()
+                    .requestMatchers("/api/usuarios/**", "/api/pagamentos/**").hasRole("ADMIN")
+                    .requestMatchers(HttpMethod.GET, "/api/**").authenticated()
+                    .anyRequest().hasRole("ADMIN")
             }
             .exceptionHandling { it.authenticationEntryPoint(HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED)) }
             .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter::class.java)

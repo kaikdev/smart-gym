@@ -11,5 +11,6 @@ data class UsuarioResponse(
     val email: String,
     val dataNascimento: LocalDate?,
     val pesoAtual: Float?,
-    val ativo: Boolean
+    val ativo: Boolean,
+    val perfil: String
 )

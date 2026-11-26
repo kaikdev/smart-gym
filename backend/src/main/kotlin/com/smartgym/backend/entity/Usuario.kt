@@ -6,6 +6,7 @@ import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
 import jakarta.persistence.Table
+import org.hibernate.annotations.ColumnDefault
 import java.time.LocalDate
 
 /**
@@ -36,5 +37,9 @@ class Usuario(
     var pesoAtual: Float? = null,
 
     @Column(name = "ativo", nullable = false)
-    var ativo: Boolean = true
+    var ativo: Boolean = true,
+
+    @ColumnDefault("'ALUNO'")
+    @Column(name = "perfil", length = 10, nullable = false)
+    var perfil: String = "ALUNO"
 )

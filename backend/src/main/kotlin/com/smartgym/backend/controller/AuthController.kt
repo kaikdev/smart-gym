@@ -25,19 +25,20 @@ class AuthController(
 
     @PostMapping("/login")
     fun login(@Valid @RequestBody request: LoginRequest): TokenResponse =
-        TokenResponse(autenticar(request.email!!, request.senha!!))
+        autenticar(request.email!!, request.senha!!)
 
     @PostMapping("/register")
     fun register(@Valid @RequestBody request: UsuarioRequest): ResponseEntity<TokenResponse> {
-        usuarioService.criar(request)
-        val token = autenticar(request.email!!, request.senha!!)
-        return ResponseEntity.status(HttpStatus.CREATED).body(TokenResponse(token))
+        usuarioService.criar(request.copy(perfil = "ALUNO"))
+        val resposta = autenticar(request.email!!, request.senha!!)
+        return ResponseEntity.status(HttpStatus.CREATED).body(resposta)
     }
 
-    private fun autenticar(email: String, senha: String): String {
+    private fun autenticar(email: String, senha: String): TokenResponse {
         val autenticacao = authenticationManager.authenticate(
             UsernamePasswordAuthenticationToken(email, senha)
         )
-        return jwtUtil.gerarToken(autenticacao.name)
+        val admin = autenticacao.authorities.any { it.authority == "ROLE_ADMIN" }
+        return TokenResponse(jwtUtil.gerarToken(autenticacao.name), if (admin) "ADMIN" else "ALUNO")
     }
 }

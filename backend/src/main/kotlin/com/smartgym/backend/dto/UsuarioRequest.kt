@@ -3,6 +3,7 @@ package com.smartgym.backend.dto
 import jakarta.validation.constraints.Email
 import jakarta.validation.constraints.NotBlank
 import jakarta.validation.constraints.Past
+import jakarta.validation.constraints.Pattern
 import jakarta.validation.constraints.Positive
 import jakarta.validation.constraints.Size
 import java.time.LocalDate
@@ -28,5 +29,8 @@ data class UsuarioRequest(
     @field:Positive(message = "O peso deve ser maior que zero")
     val pesoAtual: Float? = null,
 
-    val ativo: Boolean? = true
+    val ativo: Boolean? = true,
+
+    @field:Pattern(regexp = "ADMIN|ALUNO", message = "O perfil deve ser ADMIN ou ALUNO")
+    val perfil: String? = null
 )

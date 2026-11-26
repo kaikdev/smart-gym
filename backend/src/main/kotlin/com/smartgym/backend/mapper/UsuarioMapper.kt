@@ -19,7 +19,8 @@ class UsuarioMapper {
             senha = senhaCriptografada,
             dataNascimento = request.dataNascimento,
             pesoAtual = request.pesoAtual,
-            ativo = request.ativo ?: true
+            ativo = request.ativo ?: true,
+            perfil = request.perfil ?: "ALUNO"
         )
 
     fun updateEntity(usuario: Usuario, request: UsuarioRequest, senhaCriptografada: String) {
@@ -29,6 +30,7 @@ class UsuarioMapper {
         usuario.dataNascimento = request.dataNascimento
         usuario.pesoAtual = request.pesoAtual
         usuario.ativo = request.ativo ?: true
+        usuario.perfil = request.perfil ?: usuario.perfil
     }
 
     fun toResponse(usuario: Usuario): UsuarioResponse =
@@ -38,6 +40,7 @@ class UsuarioMapper {
             email = usuario.email,
             dataNascimento = usuario.dataNascimento,
             pesoAtual = usuario.pesoAtual,
-            ativo = usuario.ativo
+            ativo = usuario.ativo,
+            perfil = usuario.perfil
         )
 }

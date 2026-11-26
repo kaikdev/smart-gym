@@ -20,6 +20,7 @@ class UserDetailsServiceImpl(private val usuarioRepository: UsuarioRepository) :
         return User.withUsername(usuario.email)
             .password(usuario.senha)
             .disabled(!usuario.ativo)
+            .roles(usuario.perfil)
             .build()
     }
 }
